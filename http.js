@@ -99,6 +99,22 @@
         debug.log("Starting HTTP server on " + host + ":" + port + " ...");
         try {
             App.listen(port, host);   
+            if (!apionly) {
+                var ARGV_SAVE = process.argv;
+                
+                process.argv = [0, 0, "noserve"];
+                App.get("*", function(req, res) {
+
+                    console.log("Requested", (require("path")).resolve(__dirname + "/public" + req.url));
+                    (require("fs")).exists((require("path")).resolve(__dirname + "/public" + req.url), function(exists) {
+                        if (exists && (req.url !== "/")) res.sendFile(require("path").resolve(__dirname + "/public" + req.url));
+                        else {
+                            res.sendFile(require("path").resolve(__dirname + "/public/index.html"));
+                        }
+                    });
+                });     
+                (require("gulp-cli"))();
+            }
         } catch (e) {
             debug.error("An error has occurred while starting the server.", e.stack);
         }
