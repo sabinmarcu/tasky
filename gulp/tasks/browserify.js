@@ -14,6 +14,7 @@ module.exports = function(gulp, attach) {
             .add('./src/deps.js')
             .bundle()
             .on('error', require("../utils/notify"))
+            // .on('error', function() {debugger;} )
             .pipe(source("deps.js"))
             .pipe(gulp.dest('./public'));
     });

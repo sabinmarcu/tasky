@@ -42,7 +42,7 @@
     } else {
 
         debug.log("The application is starting up...");
-        var Grabber = require("./grabber");
+        var Grabber = require("./server/grabber");
 
         if (args.repository !== null && typeof args.repository !== "undefined") {
 
@@ -97,7 +97,7 @@
         } else {
 
             debug.log("Accessing information by using an API");
-            var Server = new (require("./http"))(host, port, args["api-only"]);
+            var Server = new (require("./server/http"))(host, port, args["api-only"]);
 
         }
     }

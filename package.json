@@ -4,7 +4,7 @@
   "version": "0.2.0",
   "dependencies": {
     "body-parser": "^1.11.0",
-    "browser-sync": "^1.7.1",
+    "bro1wser-sync": "^1.7.1",
     "browserify": "^6.3.3",
     "cliparser": "^0.2.2",
     "debug": "^2.1.1",
@@ -16,14 +16,14 @@
     "gulp-serve": "^0.3.0",
     "gulp-watch": "^2.0.0",
     "less": "^2.1.1",
-    "lessify": "^0.4.1",
     "material-ui": "^0.3.1",
+    "node-lessify": "0.0.9",
     "node-uuid": "^1.4.2",
     "path": "^0.4.9",
     "react": "^0.12.1",
     "reactify": "^0.17.1",
     "stylify": "^1.1.2",
-    "through": "^2.3.6",
+    "through": "^2.3.1`·6",
     "vinyl-source-stream": "^1.0.0"
   },
   "scripts": {
@@ -32,17 +32,10 @@
     "build-deps": "browserify src/deps.js > public/deps.js",
     "watch": "watchify index.js -o browser.js --debug --verbose"
   },
-  "browserify": {
-    "transform": [
-      "reactify",
-      "lessify"
-    ]
-  },
   "devDependencies": {
     "gulp-livereload": "^2.1.1",
     "gulp-plumber": "^0.6.6",
     "gulp-watchify": "^0.2.0",
-    "node-lessify": "0.0.6",
     "watchify": "^0.6.4"
   }
 }

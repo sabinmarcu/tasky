@@ -2,25 +2,28 @@
  * @jsx React.DOM
 */
 
-var React = require('react'),
-  Paper = mui.Paper, 
-  FlatButton = mui.FlatButton,
-  RaisedButton = mui.RaisedButton,
-  DropDownMenu = mui.DropDownMenu;
+(function() {
+  'use strict';
+  var React = require('react'),
+    Paper        = mui.Paper, 
+    FlatButton   = mui.FlatButton,
+    RaisedButton = mui.RaisedButton,
+    DatePicker   = mui.DatePicker;
 
 
-var SomeAwesomeComponent = React.createClass({
+  var SomeAwesomeComponent = React.createClass({
 
-  render: function() {
-    return (
-        <Paper zDepth="2">
-            <FlatButton label="Cool" />
-            <RaisedButton label="Cool" />
-            <DropDownMenu menuItems={[{payload: 1, text: 'First'}, {payload: 2, text: 'Second'}]} />
-        </Paper>
-    );
-  }
+    render: function() {
+      return (
+          <Paper zDepth='2'>
+              <FlatButton label="Cool" />
+              <RaisedButton label="Cool" />
+              <DatePicker hintText="Choose Date" />
+          </Paper>
+      );
+    }
 
-});
+  });
 
-module.exports = SomeAwesomeComponent;
+  module.exports = SomeAwesomeComponent;
+})();

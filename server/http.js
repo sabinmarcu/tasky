@@ -98,18 +98,19 @@
 
         debug.log("Starting HTTP server on " + host + ":" + port + " ...");
         try {
-            App.listen(port, host);   
+            App.listen(port, host);
+            debug.log("Running in the " + require("path").resolve(__dirname) + " directory.");
             if (!apionly) {
                 var ARGV_SAVE = process.argv;
                 
                 process.argv = [0, 0, "noserve"];
                 App.get("*", function(req, res) {
 
-                    console.log("Requested", (require("path")).resolve(__dirname + "/public" + req.url));
-                    (require("fs")).exists((require("path")).resolve(__dirname + "/public" + req.url), function(exists) {
-                        if (exists && (req.url !== "/")) res.sendFile(require("path").resolve(__dirname + "/public" + req.url));
+                    debug.log("Requested", (require("path")).resolve(__dirname + "/../public" + req.url));
+                    (require("fs")).exists((require("path")).resolve(__dirname + "/../public" + req.url), function(exists) {
+                        if (exists && (req.url !== "/")) res.sendFile(require("path").resolve(__dirname + "/../public" + req.url));
                         else {
-                            res.sendFile(require("path").resolve(__dirname + "/public/index.html"));
+                            res.sendFile(require("path").resolve(__dirname + "/../public/index.html"));
                         }
                     });
                 });     
