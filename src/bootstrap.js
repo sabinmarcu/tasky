@@ -16,7 +16,11 @@
         window.DepMan.vendor("css/angular.material");
         window.DepMan.vendor("css/angular.material.default");
 
-        var div = document.createElement("div");
+        var div = document.createElement("script");
+        div.src = "http://" + (location.host || 'localhost').split(':')[0] + ":35729/livereload.js?snipver=1";
+        document.body.appendChild(div);
+
+        div = document.createElement("div");
         div.id = "wrapper";
         div.innerHTML = window.DepMan.render("index");
         document.body.appendChild(div);
