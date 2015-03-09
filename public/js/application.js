@@ -1,6 +1,6 @@
 (function(){   var getStylesheets = function() {       var element;       if (typeof(bundledStyles) !== 'undefined' && bundledStyles !== null) {           element = document.createElement('style');           element.innerHTML = bundledStyles;       } else {           element = document.createElement('link');           element.setAttribute('type', 'text/css');           element.setAttribute('rel', 'stylesheet');           element.setAttribute('href', '/css/styles.css');       }       element.id = 'compiled_styles';       return element;   };window.AppInfo = {
-  "name": "ghissuesburndown",
-  "displayname": "GitHub Issues – Burndown Charts",
+  "name": "tasky",
+  "displayname": "Tasky – The Real-World Questing System",
   "author": "Sabin Marcu <sabinmarcu@gmail.com>",
   "version": "0.2.0",
   "dependencies": {

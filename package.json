@@ -1,6 +1,6 @@
 {
-  "name": "ghissuesburndown",
-  "displayname": "GitHub Issues – Burndown Charts",
+  "name": "tasky",
+  "displayname": "Tasky – The Real-World Questing System",
   "author": "Sabin Marcu <sabinmarcu@gmail.com>",
   "version": "0.2.0",
   "dependencies": {
