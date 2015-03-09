@@ -1,4 +1,4 @@
-(function(){ 
+(function(){
     "use strict";
 
     var info    = process.appinfo = require("./package.json"),
@@ -33,8 +33,9 @@
             warning: DEBUG("app:warning:main"),
             error  : DEBUG("app:error:main"),
             log    : DEBUG("app:log:main")
-        };  
-    debug.error.log = console.error.bind(console); 
+        };
+    debug.error.log = console.error.bind(console);
+
 
     debug.log("Bootstrapping Application");
     if (args.version) {
@@ -59,7 +60,7 @@
                 debug.log("Figuring out the repository (" + args.repository + ")");
                 var repo = ("" + args.repository).split("/");
 
-                if (repo.length !== 2) 
+                if (repo.length !== 2)
                     if (repo.length > 2) throw new Error("There are two many things linked in the repository name!");
                     else throw new Error("There are two few things linked in the repository name!");
 

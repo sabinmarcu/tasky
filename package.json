@@ -1,5 +1,6 @@
 {
   "name": "ghissuesburndown",
+  "displayname": "GitHub Issues – Burndown Charts",
   "author": "Sabin Marcu <sabinmarcu@gmail.com>",
   "version": "0.2.0",
   "dependencies": {
@@ -9,6 +10,7 @@
     "debug": "^2.1.1",
     "express": "^4.11.2",
     "github": "^0.2.3",
+    "jade": "^1.9.2",
     "nib": "^1.1.0",
     "node-uuid": "^1.4.2",
     "stitchw": "^0.5.16",

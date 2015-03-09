@@ -112,6 +112,7 @@
                             App.get("/" + sourceInfo.public[pkg.folder] + pkg.filename, function(req, res) {
                                 debug.log("Compiling source ", req.url);
                                 compile().then(function(source){
+                                    debug.log("Sending " + req.url + " with content type " + pkg["content-type"] || "application/javascript");
                                     res.set("Content-Type", pkg["content-type"] || "application/javascript");
                                     res.status(200).send(source);
                                 }, function(error){

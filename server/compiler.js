@@ -35,14 +35,14 @@
             // "   'use strict';" +
             "   var getStylesheets = function() {" +
             "       var element;" +
-            "       if (bundledStyles !== null && typeof(bundledStyles) !== 'undefined') {" +
+            "       if (typeof(bundledStyles) !== 'undefined' && bundledStyles !== null) {" +
             "           element = document.createElement('style');" +
             "           element.innerHTML = bundledStyles;" +
             "       } else {" +
             "           element = document.createElement('link');" +
             "           element.setAttribute('type', 'text/css');" +
             "           element.setAttribute('rel', 'stylesheet');" +
-            "           element.setAttribute('href', '/css/#{json.name}.css');" +
+            "           element.setAttribute('href', '/css/styles.css');" +
             "       }" +
             "       element.id = 'compiled_styles';" +
             "       return element;" +
@@ -120,8 +120,18 @@
             extras.map(function(gen) {
                 sources.push(gen);
             });
+
+            source = "";
+            sources.filter(function(set) {
+                if (set.type == "pre") return set;
+                return null;
+            }).map(function(set) {
+                source += set.generator();
+            });
+
+            return source;
         };
-        var compileSources = function() {
+        var compileSources = function(prev) {
             return new Promise(function(accept, reject) {
                 try {
                     debug.log("MILESTONE", "Compiling Sources");
@@ -135,7 +145,16 @@
                         }
                     packages.application.compiler.compile(function(err, source) {
                         if (_exists(err)) reject(err);
-                        else accept(source);
+                        else {
+                            source = (prev || "") + source;
+                            sources.filter(function(set) {
+                                if (set.type == "post") return set;
+                                return null;
+                            }).map(function(set) {
+                                source += set.generator();
+                            });
+                            accept(source);  
+                        }
                     });
                 } catch (e) {
                     reject(e);
