@@ -24,6 +24,7 @@
 
     process.env.PORT = port;
     process.env.IP   = host;
+    process.env.pwd  = __dirname;
 
     DEBUG.enable("app:error*");
     DEBUG.enable("app:warning*");

@@ -1,4 +1,6 @@
 (function(){
+    "use strict";
+
     var DEBUG  = require("debug");
     var    debug  = {
             warning: DEBUG("app:warning:compiler"),
@@ -65,7 +67,20 @@
         }, sources = [], config = JSON.parse(fs.readFileSync(path.resolve(__dirname + "/../config/sources.json"), "utf-8")), extras = [
             {
                 type: "pre",
-                generator: function() { return "window.AppInfo = " + fs.readFileSync(path.resolve(__dirname + "/../package.json")) + ";"; }
+                generator: function(cnf) { if (typeof cnf.primary === "undefined") return "";  return "window.AppInfo = " + fs.readFileSync(path.resolve(__dirname + "/../package.json")) + ";"; }
+            }, {
+                type: "pre",
+                generator: function(cnf) { if (typeof cnf.primary === "undefined") return "";
+                    var Walker = require("./walker"),
+                        walker = new Walker("src");
+
+                    return "window.SrcInfo = window.SrcInfo || {}; window.SrcInfo['" + cnf.filename + "'] = " + JSON.stringify(walker.trim(walker.tree)) + ";"}
+            }, {
+                type: "post",
+                generator: function(cnf) {
+                    if (typeof cnf.primary === "undefined") return "";
+                    return "window.SrcInfo = window.SrcInfo || {}; window.SrcInfo['default'] = window.SrcInfo['" + cnf.filename + "'];";
+                }
             }
         ];
 
@@ -83,6 +98,14 @@
                 config: config.packages.stylesheets,
                 compiler: {
                     base: path.resolve(__dirname + "/../" + config.packages.stylesheets.index),
+                }
+            },
+            map: function(fn) {
+                var i = 0;
+                for (var key in this) {
+                    if (key === "map") continue;
+                    else fn(this[key], i);
+                    i += 1;
                 }
             }
         };
@@ -121,12 +144,14 @@
                 sources.push(gen);
             });
 
-            source = "";
+            var source = "";
             sources.filter(function(set) {
                 if (set.type == "pre") return set;
                 return null;
             }).map(function(set) {
-                source += set.generator();
+                packages.map(function(pkg) {
+                    source += set.generator(pkg.config);
+                });
             });
 
             return source;
@@ -151,9 +176,11 @@
                                 if (set.type == "post") return set;
                                 return null;
                             }).map(function(set) {
-                                source += set.generator();
+                                packages.map(function(pkg) {
+                                    source += set.generator(pkg.config);
+                                });
                             });
-                            accept(source);  
+                            accept(source);
                         }
                     });
                 } catch (e) {

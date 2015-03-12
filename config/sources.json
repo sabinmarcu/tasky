@@ -12,8 +12,9 @@
             "filename": "application.js",
             "folder": "js",
             "compiler": "compile",
+            "primary": true,
             "write": true
-        }, 
+        },
         "stylesheets": {
             "paths": [
                 "src/stylesheets/"
