@@ -104,11 +104,10 @@
             image:      function(module) { return _data(module, "images/"); },
             font:       function(module) { return _data(module, "fonts/"); },
             json:       function(module) { return _data(module, "jsons/"); },
-            helper:     function(module) { return _data(module, "helpers/"); },
-            controller: function(module) { return _data(module, "controllers/"); },
-            directive:  function(module) { return _data(module, "directives/"); },
-            model:      function(module) { return _data(module, "models/"); },
-            lib:        function(module) { return _data(module, "vendor/"); },
+            helper:     function(module) { return _classes(module, "helpers/"); },
+            controller: function(module) { return _classes(module, "controllers/"); },
+            directive:  function(module) { return _classes(module, "directives/"); },
+            model:      function(module) { return _classes(module, "models/"); },
             language:   function(module) { return _data(module, "languages/"); }
         };
     };

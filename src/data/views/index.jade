@@ -1,3 +1,13 @@
-header Stuff
-section#appwrapper
-    md-button.md-raised Cool Thing
+md-toolbar(style="background: white")
+    h2.md-toolbar-tools Menu Thingy
+    
+md-content.md-padding(md-theme='docs-dark', layout='row', layout-sm='column', style='font-size:1.2em')
+  md-input-container
+    label Title
+    input(ng-model='user.title')
+  md-input-container
+    label Email
+    input(ng-model='user.email', type='email')
+
+md-button.md-primary Primary Button
+md-button.md-raised Button
